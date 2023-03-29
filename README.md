@@ -40,3 +40,12 @@ To upload the source files to the microcontroller, either use [WebREPL](https://
 ## License
 
 Distributed under the MIT License
+
+To Do:
+- Auto sleep after x minutes
+- Estimate flow rate locally
+- Implement Timer system locally
+  - change web app to fetch from scale
+- On-device calibration mode
+- Display weight, timer, and flow rate simulataneously
+
