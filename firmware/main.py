@@ -38,7 +38,7 @@ micropython.alloc_emergency_exception_buf(100)
 ### pin/module setup ###
 
 # oled display
-i2c = I2C(-1, scl=Pin(_I2C_SCL), sda=Pin(_I2C_SDA))
+i2c = I2C(1, scl=Pin(_I2C_SCL), sda=Pin(_I2C_SDA))
 screen = SSD1306_I2C(width=_SSD1306_WIDTH, height=_SSD1306_HEIGHT, i2c=i2c)
 # clear screen and display logo
 screen.fill(0)
