@@ -36,3 +36,11 @@ class KalmanFilter:
         self.last_estimate = current_estimate
 
         return current_estimate
+
+    def get_last_estimate(self) -> float:
+        """Getter for last_estimate
+
+        Returns:
+            float: filtered measurement taking into account previous values and trend
+        """
+        return self.last_estimate

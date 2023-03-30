@@ -27,6 +27,7 @@ _SSD1306_HEIGHT = const(32)
 _HX711_DOUT = const(14)
 _HX711_SCK  = const(13)
 _CALIBRATION_FACTOR = 1959.57 # scale calibration factor
+_IDLE_SLEEP_TIME = 300000 # amount of idle time before sleeping (in ms)
 _DEBUG = True
 
 # check if the device woke from a deep sleep
@@ -182,10 +183,17 @@ def main():
     _thread.start_new_thread(display_weight, ())
 
     last = 0
+    last_change = time.ticks_ms()
     while True:
         weight = hx.get_units(times=1)
         filtered_weight = kf.update_estimate(weight)
         now = time.ticks_ms()
+        # log when there is measured activity
+        if abs(filtered_weight - kf.get_last_estimate()) > 0.1:
+            last_change = now
+        # if no change for last x ms, trigger deep sleep
+        if time.ticks_diff(now, last_change) >= _IDLE_SLEEP_TIME:
+            sleep_callback(arg=None)
         if time.ticks_diff(now, last) > 50:
             last = now
             rounded_weight = round(filtered_weight / 0.05) * 0.05
