@@ -62,7 +62,7 @@ bat_percent = 0
 hx = HX711(dout=_HX711_DOUT, pd_sck=_HX711_SCK, gain=64)
 hx.set_scale(_CALIBRATION_FACTOR)
 hx.tare()
-kf.update_estimate(hx.get_units(times=1))
+kf.update_estimate(hx.get_units(times=3))
 filtered_weight = 0
 
 # buttons
@@ -186,7 +186,7 @@ def main():
         weight = hx.get_units(times=1)
         filtered_weight = kf.update_estimate(weight)
         now = time.ticks_ms()
-        if time.ticks_diff(now, last) > 100:
+        if time.ticks_diff(now, last) > 50:
             last = now
             rounded_weight = round(filtered_weight / 0.05) * 0.05
             scales.set_weight(rounded_weight, notify=True)
