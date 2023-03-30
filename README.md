@@ -1,6 +1,6 @@
 # DIY Smart Coffee and Espresso Scale
 
-This is a modified version of the amazing project by **Valentin Bersier**, original repo at https://github.com/beeb/coffee-scale-app. This repo only contains the firmware for the **ESP32 microcontroller**, go to the original repo for the rest of the software.
+This is a modified version of a modified version of the project by **Valentin Bersier**, original repo at https://github.com/beeb/coffee-scale-app. This repo only contains the firmware for the **ESP32 microcontroller** and is based off of **Johan Cronje's** firmware at https://github.com/Nkawu/coffee-scale-firmware.
 
 ## Modification details
 For this version of the scale, the 3D printed housing was completely redesigned to fit on a Breville Dual Boiler espresso machine. The 3D printable parts are available from [Printables - Bluetooth Espresso Scale ESP32 Feather based](https://www.printables.com/model/213101-bluetooth-espresso-scale-esp32-feather-based)
@@ -42,10 +42,10 @@ To upload the source files to the microcontroller, either use [WebREPL](https://
 Distributed under the MIT License
 
 To Do:
-- Auto sleep after x minutes
-- Estimate flow rate locally
-- Implement Timer system locally
-  - change web app to fetch from scale
-- On-device calibration mode
-- Display weight, timer, and flow rate simulataneously
+- [x] Auto sleep after x minutes
+- [ ] Estimate flow rate locally
+- [ ] Implement Timer system locally
+  - [ ] change web app to fetch from scale
+- [ ] On-device calibration mode
+- [ ] Display weight, timer, and flow rate simulataneously
 
