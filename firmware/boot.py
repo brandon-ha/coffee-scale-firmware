@@ -12,4 +12,4 @@ def do_connect():
             pass
     print('Network config:', wlan.ifconfig())
 
-do_connect()
+# do_connect()

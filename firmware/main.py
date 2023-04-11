@@ -26,7 +26,8 @@ _SSD1306_WIDTH  = const(128)
 _SSD1306_HEIGHT = const(32)
 _HX711_DOUT = const(14)
 _HX711_SCK  = const(13)
-_CALIBRATION_FACTOR = 1959.57 # scale calibration factor
+_CALIBRATION_FACTOR = 2133.92 # scale calibration factor
+_CALIBRATION_OFFSET = 33462.4 # scale offset factor
 _IDLE_SLEEP_TIME = 300000 # amount of idle time before sleeping (in ms)
 _DEBUG = True
 
@@ -62,8 +63,9 @@ bat_percent = 0
 # hx711 load cell amp
 hx = HX711(dout=_HX711_DOUT, pd_sck=_HX711_SCK, gain=64)
 hx.set_scale(_CALIBRATION_FACTOR)
+hx.set_offset(_CALIBRATION_OFFSET)
 hx.tare()
-kf.update_estimate(hx.get_units(times=3))
+kf.update_estimate(hx.get_units(times=1))
 filtered_weight = 0
 
 # buttons
@@ -181,6 +183,9 @@ def main():
 
     # start display_weight() in a thread
     _thread.start_new_thread(display_weight, ())
+
+    # connect to wifi
+    if _DEBUG: _thread.start_new_thread(do_connect, ())
 
     last = 0
     last_change = time.ticks_ms()
